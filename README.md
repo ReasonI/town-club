@@ -1,4 +1,4 @@
-# [:busts_in_silhouette: 동동 - 동네 동아리 :busts_in_silhouette:]
+# [동동 - 동네 동아리]
 함께 취미 생활을 할 사람을 모집할 수 있는 위치 기반 서비스
 
 
