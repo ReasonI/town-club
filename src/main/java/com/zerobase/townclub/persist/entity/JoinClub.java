@@ -19,8 +19,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @DynamicInsert
 @DynamicUpdate
-@Entity(name = "JOIN")
-public class Join {
+@Entity(name = "JOINCLUB")
+public class JoinClub {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
