@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import lombok.*;
 import java.time.LocalDateTime;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
@@ -40,8 +41,11 @@ public class User implements UserDetails {
   private Double lat;
   private Double lon;
 
+  @ColumnDefault("3")
   private Integer distance;
 
+  @ColumnDefault("'IN_USE'")
+  @Enumerated(EnumType.STRING)
   private UserStatus userStatus;
 
   @CreatedDate
