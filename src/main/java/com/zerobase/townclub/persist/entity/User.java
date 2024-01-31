@@ -12,9 +12,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @ToString
@@ -25,7 +25,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @DynamicInsert
 @DynamicUpdate
 @Entity(name = "USER")
-public class User implements UserDetails {
+public class User  {
+//  implements UserDetails
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,40 +57,40 @@ public class User implements UserDetails {
   private LocalDateTime updatedAt;
 
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return this.roles.stream()
-        .map(SimpleGrantedAuthority::new)
-        .collect(Collectors.toList());
-  }
-
-  @Override
-  public String getPassword() {
-    return null;
-  }
-
-  @Override
-  public String getUsername() {
-    return this.nickname;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return false;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return false;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return false;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return false;
-  }
+//  @Override
+//  public Collection<? extends GrantedAuthority> getAuthorities() {
+//    return this.roles.stream()
+//        .map(SimpleGrantedAuthority::new)
+//        .collect(Collectors.toList());
+//  }
+//
+//  @Override
+//  public String getPassword() {
+//    return null;
+//  }
+//
+//  @Override
+//  public String getUsername() {
+//    return this.nickname;
+//  }
+//
+//  @Override
+//  public boolean isAccountNonExpired() {
+//    return false;
+//  }
+//
+//  @Override
+//  public boolean isAccountNonLocked() {
+//    return false;
+//  }
+//
+//  @Override
+//  public boolean isCredentialsNonExpired() {
+//    return false;
+//  }
+//
+//  @Override
+//  public boolean isEnabled() {
+//    return false;
+//  }
 }
