@@ -13,7 +13,9 @@ public enum ErrorCode {
   USER_EXIST(HttpStatus.BAD_REQUEST, "이미 사용 중인 핸드폰 번호입니다."),
 
   //SMS
-  PHONENUM_NOT_FOUND(HttpStatus.NOT_FOUND, "문자 전송을 하지 않은 번호입니다.");
+  PHONENUM_NOT_FOUND(HttpStatus.NOT_FOUND, "문자 전송을 하지 않은 번호입니다."),
+  TIME_EXPIRED(HttpStatus.REQUEST_TIMEOUT, "5분이 지났습니다."),
+  WRONG_AUTH_NUM(HttpStatus.UNAUTHORIZED, "인증번호가 다릅니다.");
 
 
   private final HttpStatus httpStatus;

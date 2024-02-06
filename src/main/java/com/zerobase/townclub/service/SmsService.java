@@ -22,6 +22,8 @@ public class SmsService {
   private final SmsRepository smsRepository;
   private final SmsUtil smsUtil;
 
+  private static final int AUTH_TIMEOUT = 5;
+
   /**
    * 본인 확인 문자 보내기
    */
@@ -56,16 +58,12 @@ public class SmsService {
         .orElseThrow(() -> new TownException(ErrorCode.PHONENUM_NOT_FOUND));
 
     // 5분 이내에 전송한 번호인지 확인
-    if(!LocalDateTime.now().isBefore(sms.getCreatedAt().plusMinutes(5))){
-      System.out.println(sms.getCreatedAt().plusMinutes(5));
-      System.out.println(LocalDateTime.now());
-      System.out.println(LocalDateTime.now().isBefore(sms.getCreatedAt().plusMinutes(5))+"?");
-      return "5분이 지났습니다.";
+    if(!LocalDateTime.now().isBefore(sms.getCreatedAt().plusMinutes(AUTH_TIMEOUT))){
+      throw new TownException(ErrorCode.TIME_EXPIRED);
     }
-    System.out.println(LocalDateTime.now().isBefore(sms.getCreatedAt().plusMinutes(5)));
     // 올바른 randomNum인지 확인
     if(!Objects.equals(request.getRandomNum(), sms.getRandomNum())){
-      return "인증번호가 다릅니다.";
+      throw new TownException(ErrorCode.WRONG_AUTH_NUM);
     }
     return "인증되었습니다.";
   }

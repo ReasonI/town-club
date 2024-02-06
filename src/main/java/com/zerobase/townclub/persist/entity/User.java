@@ -42,12 +42,10 @@ public class User  {
   private Double lat;
   private Double lon;
 
-  @ColumnDefault("3")
-  private Integer distance;
+  private Integer distance = 3;
 
-  @ColumnDefault("'IN_USE'")
   @Enumerated(EnumType.STRING)
-  private UserStatus userStatus;
+  private UserStatus userStatus = UserStatus.IN_USE;
 
   @CreatedDate
   @Column(updatable = false)

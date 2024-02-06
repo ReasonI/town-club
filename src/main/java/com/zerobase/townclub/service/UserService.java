@@ -35,8 +35,7 @@ public class UserService  {
   @Transactional
   public UserDto register(SignUp.Request request) {
 
-    boolean exists = this.userRepository.existsByPhoneNum(request.getPhoneNum());
-    if (exists) {
+    if (this.userRepository.existsByPhoneNum(request.getPhoneNum())) {
       throw new TownException(ErrorCode.USER_EXIST);
     }
 
