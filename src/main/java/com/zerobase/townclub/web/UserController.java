@@ -6,8 +6,8 @@ import com.zerobase.townclub.model.user.UserDto;
 import com.zerobase.townclub.persist.entity.User;
 import com.zerobase.townclub.security.TokenProvider;
 import com.zerobase.townclub.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ public class UserController {
    * 회원가입
    */
   @PostMapping("/signup")
-  public SignUp.Response signup(@RequestBody @Validated SignUp.Request request) {
+  public SignUp.Response signup(@RequestBody @Valid SignUp.Request request) {
     return SignUp.Response.from(
         userService.register(request)
     );

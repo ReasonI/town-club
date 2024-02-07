@@ -41,7 +41,7 @@ public class PostService {
     return PostDto.fromEntity(
         postRepository.save(Post.builder()
                 .user(user)
-                .category(category)
+                .category(request.getCategory())
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .lat(request.getLat())

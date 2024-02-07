@@ -2,9 +2,9 @@ package com.zerobase.townclub.web;
 
 import com.zerobase.townclub.model.post.CreatePost;
 import com.zerobase.townclub.service.PostService;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class PostController {
 
   @PostMapping
 //  @PreAuthorize("hasRole('USER_WRITE')")
-  public CreatePost.Response createPost(@RequestBody CreatePost.Request request, Principal principal){
+  public CreatePost.Response createPost(@RequestBody @Valid CreatePost.Request request, Principal principal){
     return CreatePost.Response.from(
         postService.createPost(request, principal)
     );

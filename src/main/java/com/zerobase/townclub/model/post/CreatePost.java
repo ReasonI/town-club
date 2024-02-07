@@ -3,6 +3,7 @@ package com.zerobase.townclub.model.post;
 import com.zerobase.townclub.model.constants.PostStatus;
 import com.zerobase.townclub.persist.entity.Category;
 import com.zerobase.townclub.persist.entity.User;
+import jakarta.validation.constraints.Future;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,10 @@ public class CreatePost {
     private Double lat;
     private Double lon;
 
+    @Future
     private LocalDateTime date;
+
+    @Future
     private LocalDateTime dueDate;
 
   }
