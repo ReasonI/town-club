@@ -42,7 +42,7 @@ public class Post {
   private LocalDateTime date;
   private LocalDateTime dueDate;
 
-  private PostStatus postStatus;
+  private PostStatus postStatus = PostStatus.IN_USE;
 
   @CreatedDate
   @Column(updatable = false)

@@ -15,7 +15,10 @@ public enum ErrorCode {
   //SMS
   PHONENUM_NOT_FOUND(HttpStatus.NOT_FOUND, "문자 전송을 하지 않은 번호입니다."),
   TIME_EXPIRED(HttpStatus.REQUEST_TIMEOUT, "5분이 지났습니다."),
-  WRONG_AUTH_NUM(HttpStatus.UNAUTHORIZED, "인증번호가 다릅니다.");
+  WRONG_AUTH_NUM(HttpStatus.UNAUTHORIZED, "인증번호가 다릅니다."),
+
+  //CATEGORY
+  CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 카테고리입니다.");
 
 
   private final HttpStatus httpStatus;
