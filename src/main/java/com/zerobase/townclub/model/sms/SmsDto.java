@@ -20,6 +20,7 @@ public class SmsDto {
   private String phoneNum;
   private Integer randomNum;
   private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
 
   public static SmsDto fromEntity(Sms sms){
     return SmsDto.builder()
@@ -27,6 +28,7 @@ public class SmsDto {
         .phoneNum(sms.getPhoneNum())
         .randomNum(sms.getRandomNum())
         .createdAt(sms.getCreatedAt())
+        .updatedAt(sms.getUpdatedAt())
         .build();
   }
 

@@ -30,6 +30,7 @@ public class SendSms {
     private String phoneNum;
     private Integer randomNum;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public static Response from(SmsDto smsDto) {
       return Response.builder()
@@ -37,6 +38,7 @@ public class SendSms {
           .phoneNum(smsDto.getPhoneNum())
           .randomNum(smsDto.getRandomNum())
           .createdAt(smsDto.getCreatedAt())
+          .updatedAt(smsDto.getUpdatedAt())
           .build();
     }
   }

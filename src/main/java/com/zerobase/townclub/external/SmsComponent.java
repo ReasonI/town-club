@@ -1,4 +1,4 @@
-package com.zerobase.townclub.sms;
+package com.zerobase.townclub.external;
 
 import jakarta.annotation.PostConstruct;
 import net.nurigo.sdk.NurigoApp;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SmsUtil {
+public class SmsComponent {
   @Value("${coolsms.api.key}")
   private String apiKey;
   @Value("${coolsms.api.secret}")

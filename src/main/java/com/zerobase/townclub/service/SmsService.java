@@ -7,9 +7,10 @@ import com.zerobase.townclub.model.sms.SendSms;
 import com.zerobase.townclub.model.sms.SmsDto;
 import com.zerobase.townclub.persist.SmsRepository;
 import com.zerobase.townclub.persist.entity.Sms;
-import com.zerobase.townclub.sms.SmsUtil;
+import com.zerobase.townclub.external.SmsComponent;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class SmsService {
 
   private final SmsRepository smsRepository;
-  private final SmsUtil smsUtil;
+  private final SmsComponent smsUtil;
 
   private static final int AUTH_TIMEOUT = 5;
+  private static final int MIN_VERIFICATION_CODE = 1000;
+  private static final int MAX_VERIFICATION_CODE = 9000;
 
   /**
    * 본인 확인 문자 보내기
@@ -30,39 +33,52 @@ public class SmsService {
   @Transactional
   public SmsDto send(SendSms.Request request) {
 
-    int verificationCode = (int) (Math.random() * 9000) + 1000;
+    int verificationCode = (int) (Math.random() * MAX_VERIFICATION_CODE) + MIN_VERIFICATION_CODE;
     smsUtil.sendOne(request.getPhoneNum(), verificationCode);
-    return SmsDto.fromEntity(
-        smsRepository.save(
-            Sms.builder()
-                .phoneNum(request.getPhoneNum())
-                .randomNum(verificationCode)
-                .build()
-        )
-    );
 
+      Optional<Sms> sms = smsRepository.findByPhoneNum(request.getPhoneNum());
 
+      if(sms.isPresent()){
+        return SmsDto.fromEntity(
+            smsRepository.save(
+                Sms.builder()
+                    .id(sms.get().getId())
+                    .phoneNum(request.getPhoneNum())
+                    .randomNum(verificationCode)
+                    .createdAt(sms.get().getCreatedAt())
+                    .updatedAt(LocalDateTime.now())
+                    .build()
+            )
+        );
+      } else{
+        return SmsDto.fromEntity(
+            smsRepository.save(
+                Sms.builder()
+                    .phoneNum(request.getPhoneNum())
+                    .randomNum(verificationCode)
+                    .build()
+            )
+        );
+      }
   }
 
   /**
-   * 본인 확인 문자 번호 검증
-   * 전송된지 5분 이내인지 시간 확인
+   * 본인 확인 문자 번호 검증 전송된지 5분 이내인지 시간 확인
    */
   // 번호 확인 api
   @Transactional
   public String auth(AuthSms.Request request) {
-
 
     // 전송된 핸드폰 번호인지 확인
     Sms sms = smsRepository.findFirst1ByPhoneNumOrderByCreatedAtDesc(request.getPhoneNum())
         .orElseThrow(() -> new TownException(ErrorCode.PHONENUM_NOT_FOUND));
 
     // 5분 이내에 전송한 번호인지 확인
-    if(!LocalDateTime.now().isBefore(sms.getCreatedAt().plusMinutes(AUTH_TIMEOUT))){
+    if (!LocalDateTime.now().isBefore(sms.getCreatedAt().plusMinutes(AUTH_TIMEOUT))) {
       throw new TownException(ErrorCode.TIME_EXPIRED);
     }
     // 올바른 randomNum인지 확인
-    if(!Objects.equals(request.getRandomNum(), sms.getRandomNum())){
+    if (!Objects.equals(request.getRandomNum(), sms.getRandomNum())) {
       throw new TownException(ErrorCode.WRONG_AUTH_NUM);
     }
     return "인증되었습니다.";

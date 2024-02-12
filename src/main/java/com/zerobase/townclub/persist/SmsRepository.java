@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SmsRepository extends JpaRepository<Sms, Long> {
   Optional<Sms> findFirst1ByPhoneNumOrderByCreatedAtDesc(String phoneNum);
+  Optional<Sms> findByPhoneNum(String phoneNum);
   }
+
