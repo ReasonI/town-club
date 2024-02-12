@@ -41,11 +41,11 @@ public class CreatePost {
   public static class Response {
 
     private Long id;
-    private User user;
-    private PostStatus postStatus;
+    private Long userId;
     public static Response from(PostDto postDto) {
       return Response.builder()
           .id(postDto.getId())
+          .userId(postDto.getUser().getId())
           .build();
     }
   }
