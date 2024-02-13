@@ -40,8 +40,8 @@ public class Post {
   private Double lat;
   private Double lon;
 
-  private LocalDateTime date;
-  private LocalDateTime dueDate;
+  private LocalDateTime joinDateTime;
+  private LocalDateTime dueDateTime;
 
   @ColumnDefault("'IN_USE'")
   @Enumerated(EnumType.STRING)

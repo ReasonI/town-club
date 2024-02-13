@@ -43,8 +43,8 @@ public class PostService {
                 .contents(request.getContents())
                 .lat(request.getLat())
                 .lon(request.getLon())
-                .date(request.getDate())
-                .dueDate(request.getDueDate())
+                .joinDateTime(request.getJoinDateTime())
+                .dueDateTime(request.getDueDateTime())
             .build()
         )
     );
