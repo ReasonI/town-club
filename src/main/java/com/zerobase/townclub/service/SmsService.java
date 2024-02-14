@@ -10,7 +10,6 @@ import com.zerobase.townclub.persist.entity.Sms;
 import com.zerobase.townclub.external.SmsComponent;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,22 +35,12 @@ public class SmsService {
     int verificationCode = (int) (Math.random() * MAX_VERIFICATION_CODE) + MIN_VERIFICATION_CODE;
     smsUtil.sendOne(request.getPhoneNum(), verificationCode);
 
-      Optional<Sms> sms = smsRepository.findByPhoneNum(request.getPhoneNum());
+    Sms sms = smsRepository.findByPhoneNum(request.getPhoneNum()).orElseGet(() -> new Sms());
 
-      if(sms.isPresent()){
-        return SmsDto.fromEntity(
-            smsRepository.save(
-                Sms.builder()
-                    .id(sms.get().getId())
-                    .phoneNum(request.getPhoneNum())
-                    .randomNum(verificationCode)
-                    .createdAt(sms.get().getCreatedAt())
-                    .updatedAt(LocalDateTime.now())
-                    .build()
-            )
-        );
-      } else{
-        return SmsDto.fromEntity(
+    sms.setPhoneNum(request.getPhoneNum());
+    sms.setRandomNum(verificationCode);
+
+    return SmsDto.fromEntity(
             smsRepository.save(
                 Sms.builder()
                     .phoneNum(request.getPhoneNum())
@@ -59,7 +48,6 @@ public class SmsService {
                     .build()
             )
         );
-      }
   }
 
   /**
