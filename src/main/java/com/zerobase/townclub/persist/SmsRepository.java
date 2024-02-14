@@ -1,5 +1,6 @@
 package com.zerobase.townclub.persist;
 
+import com.zerobase.townclub.model.sms.SmsDto;
 import com.zerobase.townclub.persist.entity.Sms;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
