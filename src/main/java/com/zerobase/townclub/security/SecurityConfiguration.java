@@ -29,7 +29,7 @@ public class SecurityConfiguration {
 
         //권한 허용할 api
         .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers("/**/signup", "/**/signin").permitAll()
+            .requestMatchers("/**/signup", "/**/signin", "/**/sms","/**/auth-sms").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);

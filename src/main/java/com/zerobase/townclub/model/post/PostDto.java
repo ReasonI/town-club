@@ -44,8 +44,8 @@ public class PostDto {
         .contents(post.getContents())
         .lat(post.getLat())
         .lon(post.getLon())
-        .date(post.getDate())
-        .dueDate(post.getDueDate())
+        .date(post.getJoinDateTime())
+        .dueDate(post.getDueDateTime())
         .postStatus(post.getPostStatus())
         .build();
   }

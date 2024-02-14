@@ -2,6 +2,7 @@ package com.zerobase.townclub.service;
 
 import com.zerobase.townclub.exception.TownException;
 import com.zerobase.townclub.model.constants.ErrorCode;
+import com.zerobase.townclub.model.constants.UserStatus;
 import com.zerobase.townclub.model.user.SignIn;
 import com.zerobase.townclub.model.user.SignUp;
 import com.zerobase.townclub.model.user.UserDto;
@@ -41,6 +42,7 @@ public class UserService implements UserDetailsService {
       throw new TownException(ErrorCode.USER_EXIST);
     }
 
+
     return UserDto.fromEntity(
         userRepository.save(User.builder()
             .nickname(request.getNickname())
@@ -48,6 +50,7 @@ public class UserService implements UserDetailsService {
             .roles(request.getRoles())
             .lat(request.getLat())
             .lon(request.getLon())
+                .userStatus(UserStatus.IN_USE)
             .build())
     );
   }

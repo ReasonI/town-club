@@ -4,6 +4,7 @@ import com.zerobase.townclub.model.constants.PostStatus;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,10 +40,12 @@ public class Post {
   private Double lat;
   private Double lon;
 
-  private LocalDateTime date;
-  private LocalDateTime dueDate;
+  private LocalDateTime joinDateTime;
+  private LocalDateTime dueDateTime;
 
-  private PostStatus postStatus = PostStatus.IN_USE;
+  @ColumnDefault("'IN_USE'")
+  @Enumerated(EnumType.STRING)
+  private PostStatus postStatus;
 
   @CreatedDate
   @Column(updatable = false)

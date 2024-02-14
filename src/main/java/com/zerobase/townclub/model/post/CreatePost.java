@@ -1,8 +1,7 @@
 package com.zerobase.townclub.model.post;
 
-import com.zerobase.townclub.model.constants.PostStatus;
 import com.zerobase.townclub.persist.entity.Category;
-import com.zerobase.townclub.persist.entity.User;
+import jakarta.validation.constraints.Future;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,13 +18,17 @@ public class CreatePost {
     private Category category;
 
     private String title;
+
     private String contents;
 
     private Double lat;
     private Double lon;
 
-    private LocalDateTime date;
-    private LocalDateTime dueDate;
+    @Future
+    private LocalDateTime joinDateTime;
+
+    @Future
+    private LocalDateTime dueDateTime;
 
   }
 
@@ -37,11 +40,11 @@ public class CreatePost {
   public static class Response {
 
     private Long id;
-    private User user;
-    private PostStatus postStatus;
+    private Long userId;
     public static Response from(PostDto postDto) {
       return Response.builder()
           .id(postDto.getId())
+          .userId(postDto.getUser().getId())
           .build();
     }
   }

@@ -2,6 +2,7 @@ package com.zerobase.townclub.model.user;
 
 import com.zerobase.townclub.model.constants.UserStatus;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import java.util.List;
 import lombok.*;
 
@@ -13,8 +14,7 @@ public class SignUp {
 
     private String nickname;
 
-    //TODO : 핸드폰 번호 validation
-    @NotNull
+    @Pattern(regexp = "^01(?:0|1|[6-9])?(\\d{3}|\\d{4})?(\\d{4})$")
     private String phoneNum;
 
     private List<String> roles;
@@ -34,12 +34,10 @@ public class SignUp {
     private Long id;
 
     private String phoneNum;
-    private UserStatus userStatus;
     public static Response from(UserDto userDto){
       return Response.builder()
           .id(userDto.getId())
           .phoneNum(userDto.getPhoneNum())
-          .userStatus(userDto.getUserStatus())
           .build();
     }
   }
