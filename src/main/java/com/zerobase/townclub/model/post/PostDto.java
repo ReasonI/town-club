@@ -30,8 +30,8 @@ public class PostDto {
   private Double lat;
   private Double lon;
 
-  private LocalDateTime date;
-  private LocalDateTime dueDate;
+  private LocalDateTime joinDateTime;
+  private LocalDateTime dueDateTime;
 
   private PostStatus postStatus;
 
@@ -44,8 +44,8 @@ public class PostDto {
         .contents(post.getContents())
         .lat(post.getLat())
         .lon(post.getLon())
-        .date(post.getJoinDateTime())
-        .dueDate(post.getDueDateTime())
+        .joinDateTime(post.getJoinDateTime())
+        .dueDateTime(post.getDueDateTime())
         .postStatus(post.getPostStatus())
         .build();
   }

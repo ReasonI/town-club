@@ -4,12 +4,14 @@ import com.zerobase.townclub.exception.TownException;
 import com.zerobase.townclub.model.constants.ErrorCode;
 import com.zerobase.townclub.model.post.CreatePost;
 import com.zerobase.townclub.model.post.PostDto;
+import com.zerobase.townclub.model.post.ReadPost;
 import com.zerobase.townclub.persist.CategoryRepository;
 import com.zerobase.townclub.persist.PostRepository;
 import com.zerobase.townclub.persist.UserRepository;
 import com.zerobase.townclub.persist.entity.Category;
 import com.zerobase.townclub.persist.entity.Post;
 import com.zerobase.townclub.persist.entity.User;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,5 +50,17 @@ public class PostService {
             .build()
         )
     );
+  }
+
+  /**
+   * 게시글 목록 조회
+   */
+
+  @Transactional
+  public PostDto readPostList(ReadPost.Request request, User user){
+
+    // user 전방 거리 구하기
+    // 특정 거리 이내의 게시글만 불러오기
+    return null;
   }
 }
