@@ -11,9 +11,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @ToString
@@ -40,9 +40,10 @@ public class User implements UserDetails {
   private Double lat;
   private Double lon;
 
-  private Integer distance;
+  private Integer distance = 3;
 
-  private UserStatus userStatus;
+  @Enumerated(EnumType.STRING)
+  private UserStatus userStatus = UserStatus.IN_USE;
 
   @CreatedDate
   @Column(updatable = false)

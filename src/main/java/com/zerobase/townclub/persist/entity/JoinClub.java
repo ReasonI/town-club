@@ -1,6 +1,6 @@
 package com.zerobase.townclub.persist.entity;
 
-import com.zerobase.townclub.model.constants.PostStatus;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.*;
@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
 @Getter
 @ToString
 @NoArgsConstructor
@@ -18,31 +19,20 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @DynamicInsert
 @DynamicUpdate
-@Entity(name = "POST")
-public class Post {
+@Entity(name = "JOINCLUB")
+public class JoinClub {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+  @JoinColumn(name = "post_id")
+  private Post post;
 
   @ManyToOne
-  @JoinColumn(name = "category_id")
-  private Category category;
-
-  private String title;
-  private String contents;
-
-  private Double lat;
-  private Double lon;
-
-  private LocalDateTime date;
-  private LocalDateTime dueDate;
-
-  private PostStatus postStatus = PostStatus.IN_USE;
+  @JoinColumn(name = "user_id")
+  private User user;
 
   @CreatedDate
   @Column(updatable = false)
