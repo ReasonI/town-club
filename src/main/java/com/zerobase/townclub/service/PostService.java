@@ -4,6 +4,7 @@ import com.zerobase.townclub.exception.TownException;
 import com.zerobase.townclub.model.constants.ErrorCode;
 import com.zerobase.townclub.model.post.CreatePost;
 import com.zerobase.townclub.model.post.PostDto;
+import com.zerobase.townclub.model.post.ReadPost;
 import com.zerobase.townclub.persist.CategoryRepository;
 import com.zerobase.townclub.persist.PostRepository;
 import com.zerobase.townclub.persist.UserRepository;
@@ -48,5 +49,23 @@ public class PostService {
             .build()
         )
     );
+  }
+
+  /**
+   * 게시글 목록 조회
+   */
+
+  @Transactional
+  public PostDto readPostList(ReadPost.Request request, User user){
+
+    // user 전방 거리 구하기
+
+    double lat = user.getLat();
+    double lon = user.getLon();
+
+    int distance = user.getDistance();
+    // 특정 거리 이내의 게시글만 불러오기
+
+    return null;
   }
 }
