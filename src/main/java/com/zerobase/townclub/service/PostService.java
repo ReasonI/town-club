@@ -11,7 +11,6 @@ import com.zerobase.townclub.persist.UserRepository;
 import com.zerobase.townclub.persist.entity.Category;
 import com.zerobase.townclub.persist.entity.Post;
 import com.zerobase.townclub.persist.entity.User;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -60,7 +59,13 @@ public class PostService {
   public PostDto readPostList(ReadPost.Request request, User user){
 
     // user 전방 거리 구하기
+
+    double lat = user.getLat();
+    double lon = user.getLon();
+
+    int distance = user.getDistance();
     // 특정 거리 이내의 게시글만 불러오기
+
     return null;
   }
 }
